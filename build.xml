@@ -8,6 +8,8 @@
    <property name="tomcat.home" value="F:\apache-tomcat-7.0.72"/>
    <!-- tomcat项目部书目录 -->
    <property name="tomcat.app" value="F:\apache-tomcat-7.0.72\webapps"/>
+   <!-- browser根目录 -->
+   <property name="browser.home" value="F:\SoftWare\Firefox"/>
 
    <!-- 删除build路径以及tomcat的webapps下的war包以及war包解压的文件夹 -->
    <target name="clean">
@@ -50,6 +52,15 @@
       </exec>
    </target>
    
+   <!-- 启动browser(FireFox) -->
+   <target name="browser.start">
+      <exec dir="${browser.home}" executable="cmd.exe">
+         <env key="BROWSER_HOME" path="${browser.home}"/>
+         <arg value="/c firefox.exe"/>
+         <arg value="/url http://localhost:8080/AntTest"/>
+      </exec>
+   </target>
+   
    <!-- 默认所有的步骤依次进行 -->
-   <target name="all" depends="clean, compile, war, copy, tomcat.start"/>
+   <target name="all" depends="clean, compile, war, copy, tomcat.start, browser.start"/>
 </project>
